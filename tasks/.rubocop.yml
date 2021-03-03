@@ -6,15 +6,37 @@ AllCops:
   Exclude:
     - '**/log/**/*'
     - '**/tmp/**/*'
+    - '**/rakelib/db/**/*'
 
 Layout/LineLength:
   Max: 120
+
+Layout/EmptyLinesAroundAttributeAccessor:
+  Enabled: true
+
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
+
+Layout/ExtraSpacing:
+  Enabled: true
+  AllowForAlignment: true
+
+Layout/IndentationStyle:
+  Enabled: true
+  IdentationWidth: 2
+  EnforcedStyle: spaces
+
+Layout/LeadingCommentSpace:
+  Enabled: true
+
+Layout/TrailingEmptyLines:
+  EnforcedStyle: final_newline
 
 Style/RedundantFetchBlock:
   Enabled: false
 
 Style/FrozenStringLiteralComment:
-  Enabled: true
+  Enabled: false
   EnforcedStyle: always
 
 Style/StringLiterals:
@@ -25,12 +47,6 @@ Style/Documentation:
 
 Style/ClassAndModuleChildren:
   Enabled: false
-
-Layout/EmptyLinesAroundAttributeAccessor:
-  Enabled: true
-
-Layout/SpaceAroundMethodCallOperator:
-  Enabled: true
 
 Lint/DeprecatedOpenSSLConstant:
   Enabled: true
