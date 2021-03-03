@@ -7,9 +7,7 @@ namespace :db do
 
     @db = Sequel.connect(Settings.db.to_hash)
 
-    version = if @db.tables.include?(:schema_info)
-                @db[:schema_info].first[:version]
-              end || 0
+    version = (@db[:schema_info].first[:version] if @db.tables.include?(:schema_info)) || 0
 
     puts "Schema Version: #{version}"
   end

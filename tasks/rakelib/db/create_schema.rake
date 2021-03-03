@@ -3,7 +3,7 @@
 namespace :db do
   desc 'Create db schema'
   task schema: :settings do
-    schema_location = "db/schema.rb"
+    schema_location = 'db/schema.rb'
     user = Settings.db.to_h[:user]
     password = Settings.db.to_h[:password]
     host = Settings.db.to_h[:host]

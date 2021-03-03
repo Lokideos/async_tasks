@@ -4,7 +4,7 @@ require 'sequel/core'
 
 namespace :db do
   desc 'Run database migrations'
-  task :migrate, %i[version] => :settings do |t, args|
+  task :migrate, %i[version] => :settings do |_t, args|
     Sequel.extension :migration
 
     Sequel.connect(Settings.db.to_hash) do |db|
