@@ -10,7 +10,7 @@ namespace :db do
 
     @db = Sequel.connect(Settings.db.to_hash)
 
-    args.with_defaults(version: (@db[:schema_info].first[:version] - 1) || 0)
+    args.with_defaults(version: @db[:schema_migrations].all[-2]&.dig(:filename) || 0)
 
     Sequel::Migrator.run(@db, migrations, target: args.version.to_i)
 
