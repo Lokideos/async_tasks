@@ -4,13 +4,10 @@ AllCops:
   StyleGuideCopsOnly: false
   NewCops: enable
   Exclude:
-    - '**/config/**/*'
     - '**/log/**/*'
     - '**/tmp/**/*'
-    - 'Gemfile'
-    - 'config.ru'
 
-Metrics/LineLength:
+Layout/LineLength:
   Max: 120
 
 Style/RedundantFetchBlock:
