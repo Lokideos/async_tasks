@@ -1,0 +1,6 @@
+app:
+  name: 'tasks'
+db:
+  adapter: postgresql
+  host: localhost
+  port: 5432
