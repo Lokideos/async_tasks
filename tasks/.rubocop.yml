@@ -8,6 +8,7 @@ AllCops:
     - '**/tmp/**/*'
     - '**/db/**/*'
     - '**/rakelib/db/**/*'
+    - '**/spec/spec_helper.rb'
 
 Layout/LineLength:
   Max: 120
