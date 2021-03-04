@@ -6,10 +6,8 @@ ENV['RACK_ENV'] ||= 'test'
 
 require_relative '../config/environment'
 
-if Application.environment == :production
-  abort('You run tests in production mode. Please don\'t do this!')
-end
-Dir[Application.root.concat('/spec/support/**/*.rb')].sort.each { |f| require f }
+abort('You run tests in production mode. Please don\'t do this!') if Application.environment == :production
+Dir[Application.root.concat('/spec/support/**/*.rb')].each { |f| require f }
 
 RSpec.configure do |config|
   config.include Rack::Test::Methods
