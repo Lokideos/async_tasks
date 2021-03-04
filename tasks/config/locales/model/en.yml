@@ -1,0 +1,10 @@
+en:
+  model:
+    errors:
+      task:
+        title:
+          blank: 'Title cannot be blank'
+        description:
+          blank: 'Description cannot be blank'
+        status:
+          blank: 'Status cannot be blank'
