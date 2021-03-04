@@ -24,7 +24,7 @@ Layout/ExtraSpacing:
 
 Layout/IndentationStyle:
   Enabled: true
-  IdentationWidth: 2
+  IndentationWidth: 2
   EnforcedStyle: spaces
 
 Layout/LeadingCommentSpace:
