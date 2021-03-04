@@ -18,6 +18,11 @@ class Application < Roda
          engine: 'slim',
          layout: 'layouts/layout',
          views: Application.root.concat('/app/views')
+  plugin :assets,
+         path: 'app/assets',
+         css: 'app.scss',
+         css_opts: { style: :compressed, cache: false },
+         timestamp_paths: true
   plugin :hooks
   include Errors
 
@@ -26,6 +31,7 @@ class Application < Roda
   end
 
   route do |r|
+    r.assets
     r.root do
       r.redirect 'tasks'
     end
