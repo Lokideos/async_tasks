@@ -20,7 +20,7 @@ class Application < Roda
          views: Application.root.concat('/app/views')
   plugin :assets,
          path: 'app/assets',
-         css: 'app.scss',
+         css: 'style.scss',
          css_opts: { style: :compressed, cache: false },
          timestamp_paths: true
   plugin :hooks
