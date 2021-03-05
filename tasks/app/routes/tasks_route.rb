@@ -2,9 +2,22 @@
 
 class TasksRoute < Application
   route do |r|
+    @tasks = Task.all
+
+    r.is Integer do |task_id|
+      @task = Task[task_id]
+
+      r.get do
+        if @task
+          view('tasks/show')
+        else
+          view('tasks/index')
+        end
+      end
+    end
+
     r.get do
-      tasks = Task.all
-      view('tasks/index', locals: { tasks: tasks })
+      view('tasks/index')
     end
   end
 
