@@ -1,6 +1,7 @@
 h1.visually-hidden Tasks
 section.dashboard
   h2.visually-hidden Dashboard
+  a.new__task[href=new_task_path] New Task
   ul.dashboard__tasks
     - @tasks.each do |task|
       li.dashboard__tasks__item = task.title

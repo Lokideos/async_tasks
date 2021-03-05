@@ -27,7 +27,8 @@ class TasksRoute < Application
     end
 
     r.get do
-      view('tasks/index')
+      new_task_path = 'tasks/new'
+      view('tasks/index', locals: { new_task_path: new_task_path })
     end
   end
 
