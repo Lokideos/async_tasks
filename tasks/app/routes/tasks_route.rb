@@ -11,9 +11,19 @@ class TasksRoute < Application
         if @task
           view('tasks/show')
         else
-          view('tasks/index')
+          r.redirect 'tasks'
         end
       end
+    end
+
+    r.get('new') do
+      view('tasks/new')
+    end
+
+    r.post('create') do
+      Task.create(params.merge(status: 'new'))
+
+      r.redirect 'tasks'
     end
 
     r.get do
