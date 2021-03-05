@@ -8,11 +8,7 @@ class TasksRoute < Application
       @task = Task[task_id]
 
       r.get do
-        if @task
-          view('tasks/show')
-        else
-          r.redirect 'tasks'
-        end
+        view('tasks/show') if @task
       end
     end
 
@@ -21,9 +17,14 @@ class TasksRoute < Application
     end
 
     r.post('create') do
-      Task.create(params.merge(status: 'new'))
+      task_params = validate_with!(TaskParamsContract, params).to_h.values
+      result = Tasks::CreateService.call(*task_params)
 
-      r.redirect 'tasks'
+      if result.success?
+        r.redirect '/'
+      else
+        view('tasks/new')
+      end
     end
 
     r.get do

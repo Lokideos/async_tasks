@@ -6,6 +6,7 @@ class Application < Roda
   end
 
   plugin :environments
+  plugin :error_handler
   plugin :hash_routes
   plugin :json_parser
   plugin :default_headers,
@@ -25,6 +26,8 @@ class Application < Roda
          timestamp_paths: true
   plugin :hooks
   include Errors
+  include Validations
+  include ApiErrors
 
   hash_branch('tasks') do |r|
     r.run TasksRoute

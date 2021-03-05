@@ -131,6 +131,8 @@ DEPENDENCIES
   activesupport (~> 6.1.0)
   config (~> 3.0.0)
   database_cleaner-sequel (~> 2.0.0)
+  dry-initializer (~> 3.0.0)
+  dry-validation (~> 1.6.0)
   fabrication (~> 2.21.0)
   forme (~> 1.11.0)
   i18n (~> 1.8.0)
