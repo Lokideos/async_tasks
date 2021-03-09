@@ -21,3 +21,18 @@ tasks_data = [
 tasks_data.each do |task_data|
   tasks << Task.create(task_data)
 end
+
+users = []
+users_data = [
+  {
+    name: 'Mark',
+    role: 'developer'
+  },
+  {
+    name: 'Bill',
+    role: 'manager'
+  }
+]
+users_data.each do |user_data|
+  users << User.create(user_data)
+end

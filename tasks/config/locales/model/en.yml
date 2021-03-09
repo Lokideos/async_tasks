@@ -8,3 +8,12 @@ en:
           blank: 'Description cannot be blank'
         status:
           blank: 'Status cannot be blank'
+      user:
+        name:
+          blank: 'Name cannot be blank'
+        role:
+          blank: 'Role cannot be blank'
+          wrong_type: 'must have one of the following values: %{types}'
+      task_assignment:
+        user_id:
+          bad_user_role: 'cannot belong to user, whose role is not one of those: %{roles}'
