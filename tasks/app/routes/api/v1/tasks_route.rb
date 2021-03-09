@@ -18,6 +18,20 @@ class TasksRoute < Application
       end
     end
 
+    r.post 'mass_assignment' do
+      result = Tasks::MassAssignmentService.call
+
+      if result.success?
+        serializer = TaskSerializer.new(result.tasks)
+
+        response.status = 204
+        serializer.serializable_hash.to_json
+      else
+        response.status = 401
+        error_response(result.errors)
+      end
+    end
+
     r.post do
       task_params = validate_with!(TaskParamsContract, params).to_h.values
       result = Tasks::CreateService.call(*task_params)

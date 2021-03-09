@@ -2,12 +2,26 @@
 
 class Task < Sequel::Model
   INITIAL_STATUS = 'unassigned'
-  ALLOWED_STATUSES = (%w[assigned] + [INITIAL_STATUS]).freeze
+  ASSIGNED_STATUS = 'assigned'
+  CLOSED_STATUS = 'closed'
+  ALLOWED_STATUSES = [INITIAL_STATUS, ASSIGNED_STATUS, CLOSED_STATUS].freeze
 
   plugin :association_dependencies
 
   one_to_one :task_assignment
   one_through_one :user, join_table: :task_assignments
+
+  dataset_module do
+    def non_closed_tasks
+      select_all
+        .where(status: INITIAL_STATUS).or(status: ASSIGNED_STATUS)
+    end
+
+    def assigned_tasks
+      select_all
+        .where(status: ASSIGNED_STATUS)
+    end
+  end
 
   def validate
     super

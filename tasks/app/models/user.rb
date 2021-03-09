@@ -11,6 +11,14 @@ class User < Sequel::Model
   one_to_one :task_assignment
   one_through_one :task, join_table: :task_assignments
 
+  dataset_module do
+    def developers_ids
+      select(:id)
+        .where(role: USER_ROLES[:developer])
+        .map(:id)
+    end
+  end
+
   def validate
     super
     validates_presence :name, message: I18n.t(:blank, scope: 'model.errors.user.name')
