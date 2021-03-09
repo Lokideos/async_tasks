@@ -2,34 +2,36 @@
 
 class TasksRoute < Application
   route do |r|
-    @tasks = Task.all
-
     r.is Integer do |task_id|
       @task = Task[task_id]
 
       r.get do
-        view('tasks/show') if @task
+        if @task.present?
+          response.status = 200
+          @task.to_json
+        else
+          response.status = 404
+          { status: 'not found' }.to_json
+        end
       end
     end
 
-    r.get('new') do
-      view('tasks/new')
-    end
-
-    r.post('create') do
+    r.post do
       task_params = validate_with!(TaskParamsContract, params).to_h.values
       result = Tasks::CreateService.call(*task_params)
 
       if result.success?
-        r.redirect '/'
+        response.status = 201
+        { status: 'created' }.to_json
       else
-        view('tasks/new')
+        response.status = 401
+        error_response(result.task || result.errors)
       end
     end
 
     r.get do
-      new_task_path = 'tasks/new'
-      view('tasks/index', locals: { new_task_path: new_task_path })
+      response.status = 200
+      Task.all.to_json
     end
   end
 

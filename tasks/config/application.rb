@@ -10,20 +10,12 @@ class Application < Roda
   plugin :hash_routes
   plugin :json_parser
   plugin :default_headers,
-         'Content-Type' => 'text/html',
+         'Content-Type' => 'application/json',
          'X-Frame-Options' => 'deny',
          'X-Content-Type-Options' => 'nosniff',
          'X-XSS-Protection' => '1; mode=block'
   plugin(:not_found) { not_found_response }
-  plugin :render,
-         engine: 'slim',
-         layout: 'layouts/layout',
-         views: Application.root.concat('/app/views')
-  plugin :assets,
-         path: 'app/assets',
-         css: 'style.scss',
-         css_opts: { style: :compressed, cache: false },
-         timestamp_paths: true
+  plugin :json_parser
   plugin :hooks
   include Errors
   include Validations
@@ -34,7 +26,6 @@ class Application < Roda
   end
 
   route do |r|
-    r.assets
     r.root do
       r.redirect 'tasks'
     end

@@ -1,8 +1,0 @@
-h1.visually-hidden New Task
-section.task
-  - f = Forme::Form.new
-  == f.open(action: 'create', method: :post)
-  == f.input(:text, value: 'foo', name: 'title')
-  == f.input(:text, value: 'foo', name: 'description')
-  == f.button('Create')
-  == f.close
