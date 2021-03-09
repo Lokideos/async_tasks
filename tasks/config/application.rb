@@ -30,6 +30,10 @@ class Application < Roda
     r.on 'api/v1/tasks' do
       r.run TasksRoute
     end
+
+    r.on 'api/v1/users' do
+      r.run UsersRoute
+    end
   end
 
   private
