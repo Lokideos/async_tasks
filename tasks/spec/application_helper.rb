@@ -14,4 +14,5 @@ RSpec.configure do |config|
   config.include RspecSequel::Matchers
   config.include RouteHelpers, type: :routes
   config.include ClientHelpers, type: :client
+  config.include SequelMatchersExtension, type: :model
 end
