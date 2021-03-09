@@ -8,6 +8,7 @@ en:
           blank: 'Description cannot be blank'
         status:
           blank: 'Status cannot be blank'
+          wrong_status: 'must have one of the following values: %{statuses}'
       user:
         name:
           blank: 'Name cannot be blank'

@@ -10,5 +10,6 @@ RSpec.describe Task, type: :model do
     it { validate_presence :title }
     it { validate_presence :description }
     it { validate_presence :status }
+    it { validate_includes Task::ALLOWED_STATUSES, :status }
   end
 end

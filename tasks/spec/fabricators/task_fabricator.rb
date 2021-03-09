@@ -3,5 +3,5 @@
 Fabricator(:task) do
   title { sequence { |n| "task_title_#{n}" } }
   description { sequence { |n| "task_description_#{n}" } }
-  status { 'new' }
+  status { Task::INITIAL_STATUS }
 end

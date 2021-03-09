@@ -10,7 +10,7 @@ module Tasks
     attr_reader :task
 
     def call
-      @task = Task.new(title: @title, description: @description, status: 'new')
+      @task = Task.new(title: @title, description: @description, status: Task::INITIAL_STATUS)
 
       if @task.valid?
         @task.save
