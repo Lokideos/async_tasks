@@ -34,4 +34,9 @@ class Task < Sequel::Model
                                        scope: 'model.errors.task.status',
                                        statuses: ALLOWED_STATUSES)
   end
+
+  # For correct work of jsonapi-serializer gem
+  def user_id
+    user.id
+  end
 end

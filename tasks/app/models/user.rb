@@ -8,8 +8,8 @@ class User < Sequel::Model
 
   plugin :association_dependencies
 
-  one_to_one :task_assignment
-  one_through_one :task, join_table: :task_assignments
+  one_to_many :task_assignments
+  many_to_many :tasks, join_table: :task_assignments
 
   dataset_module do
     def developers_ids
@@ -26,5 +26,10 @@ class User < Sequel::Model
     validates_includes USER_ROLES.values, :role,
                        message: I18n.t(:wrong_type,
                                        scope: 'model.errors.user.role', types: USER_ROLES.values)
+  end
+
+  # For correct work of jsonapi-serializer gem
+  def task_ids
+    tasks.map(&:id)
   end
 end
