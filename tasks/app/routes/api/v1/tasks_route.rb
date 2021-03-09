@@ -7,8 +7,10 @@ class TasksRoute < Application
 
       r.get do
         if @task.present?
+          serializer = TaskSerializer.new(@task)
+
           response.status = 200
-          @task.to_json
+          serializer.serializable_hash.to_json
         else
           response.status = 404
           { status: 'not found' }.to_json
@@ -30,8 +32,11 @@ class TasksRoute < Application
     end
 
     r.get do
+      tasks = Task.reverse_order(:created_at)
+      serializer = TaskSerializer.new(tasks.all)
+
       response.status = 200
-      Task.all.to_json
+      serializer.serializable_hash.to_json
     end
   end
 
