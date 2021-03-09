@@ -21,16 +21,14 @@ class Application < Roda
   include Validations
   include ApiErrors
 
-  hash_branch('tasks') do |r|
-    r.run TasksRoute
-  end
-
   route do |r|
     r.root do
-      r.redirect 'tasks'
+      r.redirect 'api/v1/tasks'
     end
 
-    r.hash_branches
+    r.on 'api/v1/tasks' do
+      r.run TasksRoute
+    end
   end
 
   private
