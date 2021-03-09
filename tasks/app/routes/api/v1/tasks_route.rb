@@ -32,6 +32,21 @@ class TasksRoute < Application
       end
     end
 
+    r.post 'close' do
+      task_params = validate_with!(CloseTaskParamsContract, params).to_h.values
+      result = Task::CloseService.call(*task_params)
+
+      if result.success?
+        serializer = TaskSerializer.new(result.task)
+
+        response.status = 204
+        serializer.serializable_hash.to_json
+      else
+        response.status = 401
+        error_response(result.task || result.errors)
+      end
+    end
+
     r.post do
       task_params = validate_with!(TaskParamsContract, params).to_h.values
       result = Tasks::CreateService.call(*task_params)
