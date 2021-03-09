@@ -2,8 +2,8 @@
 
 RSpec.describe TaskAssignment, type: :model do
   context 'associations' do
-    it { have_one_to_one :tasks }
-    it { have_one_to_one :users }
+    it { have_many_to_one :tasks }
+    it { have_many_to_one :users }
   end
 
   context 'validations' do
