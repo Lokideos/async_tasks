@@ -15,11 +15,8 @@ class User < Sequel::Model
     super
     validates_presence :name, message: I18n.t(:blank, scope: 'model.errors.user.name')
     validates_presence :role, message: I18n.t(:blank, scope: 'model.errors.user.role')
-    unless USER_ROLES.values.include?(role)
-      errors.add(
-        :role,
-        I18n.t(:wrong_type, scope: 'model.errors.user.role', types: USER_ROLES.values)
-      )
-    end
+    validates_includes USER_ROLES.values, :role,
+                       message: I18n.t(:wrong_type,
+                                       scope: 'model.errors.user.role', types: USER_ROLES.values)
   end
 end

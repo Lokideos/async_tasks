@@ -5,8 +5,8 @@ class TaskAssignment < Sequel::Model
 
   plugin :association_dependencies
 
-  one_to_many :tasks
-  one_to_many :users
+  one_to_one :tasks
+  one_to_one :users
 
   def validate
     super
