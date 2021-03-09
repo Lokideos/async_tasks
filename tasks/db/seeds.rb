@@ -9,7 +9,7 @@ tasks_data = [
   {
     title: 'Add authentication',
     description: 'All users has to be able to authenticate in our system',
-    status: 'unassigned'
+    status: 'assigned'
   },
   {
     title: 'Add verification',
@@ -36,3 +36,5 @@ users_data = [
 users_data.each do |user_data|
   users << User.create(user_data)
 end
+
+TaskAssignment.create(task_id: tasks.first.id, user_id: users.first.id)
