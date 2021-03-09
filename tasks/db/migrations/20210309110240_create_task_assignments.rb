@@ -10,8 +10,8 @@ Sequel.migration do
       column :created_at, 'timestamp(6) without time zone', null: false
       column :updated_at, 'timestamp(6) without time zone', null: false
 
-      index [:task_id], name: :index_user_sessions_on_user_id
-      index [:user_id], name: :index_user_sessions_on_uuid
+      index [:task_id], name: :index_task_assignments_on_task_id, unique: true
+      index [:user_id], name: :index_task_assignments_on_user_id
     end
   end
 

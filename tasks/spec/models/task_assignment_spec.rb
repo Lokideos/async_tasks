@@ -7,6 +7,7 @@ RSpec.describe TaskAssignment, type: :model do
   end
 
   context 'validations' do
+    it { validate_unique :task_id }
     let(:task) { Fabricate(:task) }
     let(:manager) { Fabricate(:user, role: 'manager') }
     let(:developer) { Fabricate(:user, role: 'developer') }

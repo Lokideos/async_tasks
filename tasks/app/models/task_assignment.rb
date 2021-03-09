@@ -10,6 +10,7 @@ class TaskAssignment < Sequel::Model
 
   def validate
     super
+    validates_unique :task_id
     user = User.find(id: user_id)
     unless PERMITTED_USER_ROLES.include?(user&.role)
       errors.add(
