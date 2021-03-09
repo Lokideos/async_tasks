@@ -23,8 +23,10 @@ class TasksRoute < Application
       result = Tasks::CreateService.call(*task_params)
 
       if result.success?
+        serializer = TaskSerializer.new(result.task)
+
         response.status = 201
-        { status: 'created' }.to_json
+        serializer.serializable_hash.to_json
       else
         response.status = 401
         error_response(result.task || result.errors)
@@ -32,8 +34,10 @@ class TasksRoute < Application
     end
 
     r.get do
+      page = params[:page].presence || 1
       tasks = Task.reverse_order(:created_at)
-      serializer = TaskSerializer.new(tasks.all)
+      tasks = tasks.paginate(page.to_i, Settings.pagination.page_size)
+      serializer = TaskSerializer.new(tasks.all, links: pagination_links(tasks))
 
       response.status = 200
       serializer.serializable_hash.to_json

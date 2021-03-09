@@ -20,6 +20,7 @@ class Application < Roda
   include Errors
   include Validations
   include ApiErrors
+  include PaginationLinks
 
   route do |r|
     r.root do
