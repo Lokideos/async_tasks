@@ -30,7 +30,7 @@ RSpec.describe Tasks::MassAssignmentService, type: :service do
     end
 
     context 'there are closed tasks' do
-      let!(:closed_task) { Fabricate(:task, status: Task::CLOSED_STATUS) }
+      let!(:closed_task) { Fabricate(:task, status: Task::COMPLETED_STATUS) }
       let!(:task_assignment) { Fabricate(:task_assignment, task_id: task.id) }
 
       it 'does not reassign closed tasks' do

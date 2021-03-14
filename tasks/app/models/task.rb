@@ -3,8 +3,8 @@
 class Task < Sequel::Model
   INITIAL_STATUS = 'unassigned'
   ASSIGNED_STATUS = 'assigned'
-  CLOSED_STATUS = 'closed'
-  ALLOWED_STATUSES = [INITIAL_STATUS, ASSIGNED_STATUS, CLOSED_STATUS].freeze
+  COMPLETED_STATUS = 'completed'
+  ALLOWED_STATUSES = [INITIAL_STATUS, ASSIGNED_STATUS, COMPLETED_STATUS].freeze
 
   plugin :association_dependencies
 

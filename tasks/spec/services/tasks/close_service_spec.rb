@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Tasks::CloseService, type: :service do
+RSpec.describe Tasks::CompleteService, type: :service do
   subject { described_class }
 
   let!(:task) { Fabricate(:task, status: Task::ASSIGNED_STATUS) }
@@ -14,7 +14,7 @@ RSpec.describe Tasks::CloseService, type: :service do
     it "updates task status to 'closed'" do
       subject.call(task.id, developer.id)
 
-      expect(task.reload.status).to eq Task::CLOSED_STATUS
+      expect(task.reload.status).to eq Task::COMPLETED_STATUS
     end
 
     it 'assigns task' do
@@ -32,7 +32,8 @@ RSpec.describe Tasks::CloseService, type: :service do
         result = subject.call(bad_task_id, developer.id)
 
         expect(result).to be_failure
-        expect(result.errors).to include(I18n.t(:not_found, scope: 'services.tasks.close_service'))
+        expect(result.errors).to include(I18n.t(:not_found,
+                                                scope: 'services.tasks.complete_service'))
       end
     end
 
@@ -44,7 +45,7 @@ RSpec.describe Tasks::CloseService, type: :service do
 
         expect(result).to be_failure
         expect(result.errors)
-          .to include(I18n.t(:unauthorized, scope: 'services.tasks.close_service'))
+          .to include(I18n.t(:unauthorized, scope: 'services.tasks.complete_service'))
       end
     end
   end
