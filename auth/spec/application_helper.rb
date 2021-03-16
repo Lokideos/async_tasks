@@ -12,5 +12,6 @@ Dir[ApplicationLoader.root.concat('/spec/support/**/*.rb')].each { |f| require f
 
 RSpec.configure do |config|
   config.include Rack::Test::Methods
+  config.include RspecSequel::Matchers
   config.include RouteHelpers, type: :routes
 end

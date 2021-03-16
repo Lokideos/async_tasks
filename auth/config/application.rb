@@ -23,7 +23,12 @@ class Application < Roda
 
   route do |r|
     r.root do
+      response.status = 200
       { status: 'ok' }.to_json
+    end
+
+    r.on 'api/v1' do
+      run AuthRoute
     end
   end
 
