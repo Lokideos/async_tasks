@@ -11,3 +11,6 @@ en:
         role:
           blank: 'Role cannot be blank'
           wrong_role: 'must have one of the following values: %{roles}'
+      user_session:
+        user_id:
+          blank: 'User id cannot be blank'

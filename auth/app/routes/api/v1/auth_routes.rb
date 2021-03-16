@@ -16,6 +16,24 @@ class AuthRoutes < Application
         end
       end
     end
+
+    r.on 'login' do
+      r.post do
+        session_params = validate_with!(SessionParamsContract, params).to_h.values
+        result = UserSessions::CreateService.call(*session_params)
+
+        if result.success?
+          token = JwtEncoder.encode(uuid: result.session.uuid)
+          meta = { token: token }
+
+          response.status = 201
+          { meta: meta }.to_json
+        else
+          response.status = 401
+          error_response(result.session || result.errors)
+        end
+      end
+    end
   end
 
   private

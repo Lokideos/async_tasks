@@ -11,3 +11,9 @@ user_data = [{ name: 'Bob', email: 'bob@example.com', role: 'admin', password: '
 user_data.each do |user|
   users << User.create(user)
 end
+
+# Create user sessions
+session_data = [{ user: users[0] }, { user: users[1] }]
+session_data.each do |session|
+  UserSession.create(session)
+end

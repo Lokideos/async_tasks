@@ -1,0 +1,5 @@
+en:
+  services:
+    user_sessions:
+      create_service:
+        unauthorized: 'Session can not be created'
