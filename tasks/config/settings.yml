@@ -1,0 +1,8 @@
+app:
+  name: 'tasks'
+pagination:
+  page_size: 10
+db:
+  adapter: postgresql
+  host: localhost
+  port: 5432

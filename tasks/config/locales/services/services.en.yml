@@ -1,0 +1,6 @@
+en:
+  services:
+    tasks:
+      complete_service:
+        not_found: 'Task not found'
+        unauthorized: 'You can close only your tasks'
