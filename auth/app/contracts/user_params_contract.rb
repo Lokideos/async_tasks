@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class UsersContract < Dry::Validation::Contract
+class UserParamsContract < Dry::Validation::Contract
   schema do
     required(:name).filled(:string)
     required(:email).filled(:string)
