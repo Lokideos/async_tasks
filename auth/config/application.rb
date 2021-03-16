@@ -28,7 +28,7 @@ class Application < Roda
     end
 
     r.on 'api/v1' do
-      run AuthRoute
+      r.run AuthRoute
     end
   end
 
