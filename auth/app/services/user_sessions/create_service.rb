@@ -12,13 +12,21 @@ module UserSessions
 
     def call
       validate
-      create_session unless failure?
+      return if failure?
+
+      @session = UserSession.find(user: @user)
+      @session = @session.present? ? reinitialized_session : create_session
     end
 
     private
 
     def validate
       return fail_t!(:unauthorized) unless @user&.authenticate(@password)
+    end
+
+    def reinitialized_session
+      @session.destroy
+      create_session
     end
 
     def create_session
