@@ -5,6 +5,6 @@ class UserParamsContract < Dry::Validation::Contract
     required(:name).filled(:string)
     required(:email).filled(:string)
     required(:role).filled(:string)
-    required(:password_digest).filled(:string)
+    required(:password).filled(:string)
   end
 end
