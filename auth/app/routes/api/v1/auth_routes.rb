@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class AuthRoute < Application
+class AuthRoutes < Application
   route do |r|
     r.on 'signup' do
       r.post do
