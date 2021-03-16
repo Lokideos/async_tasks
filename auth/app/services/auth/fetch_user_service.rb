@@ -8,6 +8,8 @@ module Auth
 
     attr_reader :user
 
+    # No need to send any CUD events here because auth logic will be implemented on each service (and it works based)
+    # on user_ids in user_sessions tables, which updates via CUD events
     def call
       return fail!(I18n.t(:forbidden, scope: 'services.auth.fetch_user_service')) if @uuid.blank? || session.blank?
 

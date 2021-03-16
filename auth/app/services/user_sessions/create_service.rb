@@ -26,13 +26,20 @@ module UserSessions
 
     def reinitialized_session
       @session.destroy
+      EventProducer.send_event('session destroyed', 'CUD', @session)
+
       create_session
     end
 
     def create_session
       @session = UserSession.new(user: @user)
 
-      @session.valid? ? @user.add_session(@session) : fail!(@session.errors)
+      if @session.valid?
+        @user.add_session(@session)
+        EventProducer.send_event('session created', 'CUD', @session)
+      else
+        fail!(@session.errors)
+      end
     end
 
     def fail_t!(key)
