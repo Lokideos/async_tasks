@@ -34,6 +34,24 @@ class AuthRoutes < Application
         end
       end
     end
+
+    # Auth service can handle authentication on its own, though I'd prefer to keep user_sessions
+    # table on all services and update this table via CUD events.
+    r.on 'auth' do
+      r.post do
+        result = Auth::FetchUserService.call(extracted_token['uuid'])
+
+        if result.success?
+          meta = { user_id: result.user.id }
+
+          response.status = 200
+          { meta: meta }.to_json
+        else
+          response.status = 403
+          error_response(result.errors)
+        end
+      end
+    end
   end
 
   private

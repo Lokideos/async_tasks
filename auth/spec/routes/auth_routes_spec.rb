@@ -86,4 +86,37 @@ RSpec.describe Application, type: :routes do
       end
     end
   end
+
+  describe 'POST api/v1/auth' do
+    let!(:user) { Fabricate(:user, name: 'bob', email: 'bob@example.com', password: '123') }
+    let!(:session) { Fabricate(:user_session) }
+
+    context 'invalid parameters' do
+      let(:bad_token) { 'bad_token' }
+      let(:auth_header_value) { "Bearer #{bad_token}" }
+
+      it 'returns an error' do
+        header 'Authorization', auth_header_value
+        post 'api/v1/auth'
+
+        expect(last_response.status).to eq(403)
+        expect(response_body['errors']).to include(
+          'detail' => 'Access to the resource is restricted'
+        )
+      end
+    end
+
+    context 'valid parameters' do
+      let(:good_token) { JwtEncoder.encode(uuid: session.uuid) }
+      let(:auth_header_value) { "Bearer #{good_token}" }
+
+      it 'returns created status' do
+        header 'Authorization', auth_header_value
+        post 'api/v1/auth'
+
+        expect(last_response.status).to eq(200)
+        expect(response_body['meta']).to eq('user_id' => session.user_id)
+      end
+    end
+  end
 end

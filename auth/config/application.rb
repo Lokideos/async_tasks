@@ -20,6 +20,7 @@ class Application < Roda
   include Errors
   include Validations
   include ApiErrors
+  include Auth
 
   route do |r|
     r.root do

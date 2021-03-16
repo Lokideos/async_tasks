@@ -3,3 +3,6 @@ en:
     user_sessions:
       create_service:
         unauthorized: 'Session can not be created'
+    auth:
+      fetch_user_service:
+        forbidden: 'Access to the resource is restricted'
