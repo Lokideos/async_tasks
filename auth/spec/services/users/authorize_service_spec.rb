@@ -24,8 +24,7 @@ RSpec.describe Users::AuthorizeService do
       result = subject.call(SecureRandom.uuid)
 
       expect(result).to be_failure
-      expect(result.errors).to include(I18n.t(:forbidden,
-                                              scope: 'services.auth.fetch_user_service'))
+      expect(result.errors).to include(I18n.t(:forbidden, scope: 'services.users.authorize_service'))
     end
   end
 end

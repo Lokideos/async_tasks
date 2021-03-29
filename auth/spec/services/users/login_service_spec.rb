@@ -53,8 +53,7 @@ RSpec.describe Users::LoginService do
       result = subject.call(user_email, user_password)
 
       expect(result).to be_failure
-      expect(result.errors).to include(I18n.t(:unauthorized,
-                                              scope: 'services.user_sessions.create_service'))
+      expect(result.errors).to include(I18n.t(:unauthorized, scope: 'services.users.login_service'))
     end
   end
 
@@ -70,8 +69,7 @@ RSpec.describe Users::LoginService do
       result = subject.call(user_email, 'invalid')
 
       expect(result).to be_failure
-      expect(result.errors).to include(I18n.t(:unauthorized,
-                                              scope: 'services.user_sessions.create_service'))
+      expect(result.errors).to include(I18n.t(:unauthorized, scope: 'services.users.login_service'))
     end
   end
 end

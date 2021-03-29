@@ -44,7 +44,7 @@ module Users
     end
 
     def fail_t!(key)
-      fail!(I18n.t(key, scope: 'services.user_sessions.create_service'))
+      fail!(I18n.t(key, scope: 'services.users.login_service'))
     end
   end
 end
