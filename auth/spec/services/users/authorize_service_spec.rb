@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Auth::FetchUserService do
+RSpec.describe Users::AuthorizeService do
   subject { described_class }
 
   context 'valid parameters' do

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module Auth
-  class FetchUserService
+module Users
+  class AuthorizeService
     prepend BasicService
 
     param :uuid

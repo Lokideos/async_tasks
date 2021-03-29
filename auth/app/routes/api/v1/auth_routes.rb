@@ -39,7 +39,7 @@ class AuthRoutes < Application
     # table on all services and update this table via CUD events.
     r.on 'auth' do
       r.post do
-        result = Auth::FetchUserService.call(extracted_token['uuid'])
+        result = Users::AuthorizeService.call(extracted_token['uuid'])
 
         if result.success?
           meta = { user_id: result.user.id }
