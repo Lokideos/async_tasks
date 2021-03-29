@@ -20,7 +20,7 @@ class AuthRoutes < Application
     r.on 'login' do
       r.post do
         session_params = validate_with!(SessionParamsContract, params).to_h.values
-        result = UserSessions::CreateService.call(*session_params)
+        result = Users::LoginService.call(*session_params)
 
         if result.success?
           token = JwtEncoder.encode(uuid: result.session.uuid)

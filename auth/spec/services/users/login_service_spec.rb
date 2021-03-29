@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe UserSessions::CreateService do
+RSpec.describe Users::LoginService do
   subject { described_class }
 
   let(:user_email) { 'bob@example.com' }

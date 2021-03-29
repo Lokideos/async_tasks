@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module UserSessions
-  class CreateService
+module Users
+  class LoginService
     prepend BasicService
 
     param :email
@@ -37,6 +37,7 @@ module UserSessions
       if @session.valid?
         @user.add_session(@session)
         EventProducer.send_event('session created', 'CUD', @session)
+        @session
       else
         fail!(@session.errors)
       end
