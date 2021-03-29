@@ -26,7 +26,7 @@ module Users
 
     def reinitialized_session
       @session.destroy
-      EventProducer.send_event('session destroyed', 'CUD', @session)
+      EventProducer.send_event('user logged out', 'BE', @session)
 
       create_session
     end
@@ -36,7 +36,7 @@ module Users
 
       if @session.valid?
         @user.add_session(@session)
-        EventProducer.send_event('session created', 'CUD', @session)
+        EventProducer.send_event('user logged in', 'BE', @session)
         @session
       else
         fail!(@session.errors)
