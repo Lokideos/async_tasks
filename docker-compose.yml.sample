@@ -1,22 +1,22 @@
-# Create '~/docker-data/hero-rider-postgres' directories before starting the containers
+# Create '~/docker-data/async-systems' directory before starting the containers
 # Don't forget to change the password! (POSTGRES_PASSWORD env variable)
 
 version: '3'
 services:
   postgresql:
     image: 'postgres:13-alpine'
-    container_name: 'db_container_name'
+    container_name: 'async-systems-db'
     environment:
       POSTGRES_PASSWORD: 'not_secure'
     ports:
-        - '5432:5432'
+      - '5432:5432'
     networks:
-      - async-tasks-network
+      - async-systems-network
     volumes:
-      - '~/docker-data/async_tasks/postgres:/var/lib/postgresql/data'
+      - '~/docker-data/async-systems/postgres:/var/lib/postgresql/data'
 
 networks:
-  async-tasks-network:
+  async-systems-network:
     driver: bridge
 
 volumes:

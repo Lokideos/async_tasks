@@ -1,0 +1,2 @@
+# Ignore local docker-compose file
+docker-compose.yml
