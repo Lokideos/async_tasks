@@ -1,0 +1,7 @@
+en:
+  api:
+    errors:
+      not_found: 'Requested resource is not found'
+      not_unique: 'Requested resource already exists'
+      missing_parameters: 'Mandatory parameters are missing'
+      unauthorized: 'Access to the requested resources is restricted'

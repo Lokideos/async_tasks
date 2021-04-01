@@ -1,0 +1,7 @@
+en:
+  services:
+    users:
+      authorize_service:
+        forbidden: 'Access to the resource is restricted'
+      login_service:
+        unauthorized: 'Session can not be created'

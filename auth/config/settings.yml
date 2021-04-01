@@ -1,0 +1,8 @@
+app:
+  name: 'auth'
+db:
+  adapter: postgresql
+  host: localhost
+  port: 5432
+application:
+  secret: '1072aa78-b9d5-4d78-a134-f97c3d37258d'
