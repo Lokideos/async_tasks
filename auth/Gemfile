@@ -17,7 +17,7 @@ gem 'pg', '~> 1.2.3'
 gem 'sequel', '~> 5.42.0'
 gem 'sequel_secure_password', '~> 0.2.0'
 
-gem 'waterdrop', '~> 1.4.0'
+gem 'waterdrop', '~> 2.0.0'
 
 gem 'bcrypt', '~> 3.1.0'
 gem 'jwt', '~> 2.2.2'
@@ -39,5 +39,5 @@ group :development, :test do
   gem 'rspec', '~> 3.10.0'
   gem 'rspec_sequel_matchers', '~> 0.5.0'
 
-  gem 'rack-unreloader', '~> 1.7.0'
+  gem 'hot_reloader', '~> 0.6.0'
 end
