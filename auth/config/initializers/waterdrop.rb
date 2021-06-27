@@ -1,9 +1,17 @@
 # frozen_string_literal: true
 
-require 'water_drop'
-require 'water_drop/sync_producer'
+# producer = WaterDrop::Producer.new do |config|
+#   config.deliver = Application.environment == :test ? false : true
+#   config.kafka = {
+#     'bootstrap.servers': 'localhost:9092',
+#     'request.required.acks': 1
+#   }
+# end
 
-WaterDrop.setup do |config|
-  config.deliver = true
-  config.kafka.seed_brokers = ['kafka://127.0.0.1:9092']
-end
+PRODUCER_SETTINGS = {
+  deliver: !(Application.environment == :test),
+  kafka: {
+    'bootstrap.servers': 'localhost:9092',
+    'request.required.acks': 1
+  }.freeze
+}.freeze
