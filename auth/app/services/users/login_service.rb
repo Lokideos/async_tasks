@@ -26,7 +26,14 @@ module Users
 
     def reinitialized_session
       @session.destroy
-      EventProducer.send_event('user logged out', 'BE', @session)
+      EventProducer.send_event(
+        topic: Settings.kafka.topics.authentication,
+        event_name: 'UserLoggedOut',
+        event_type: 'BE',
+        payload: {
+          uuid: @session.uuid
+        }
+      )
 
       create_session
     end
@@ -36,7 +43,14 @@ module Users
 
       if @session.valid?
         @user.add_session(@session)
-        EventProducer.send_event('user logged in', 'BE', @session)
+        EventProducer.send_event(
+          topic: Settings.kafka.topics.authentication,
+          event_name: 'UserLoggedIn',
+          event_type: 'BE',
+          payload: {
+            uuid: @session.uuid
+          }
+        )
         @session
       else
         fail!(@session.errors)

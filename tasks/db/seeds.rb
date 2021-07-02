@@ -2,77 +2,66 @@
 
 # This file should contain all the record creation needed to seed the database with its
 # default values.
+require 'pry-byebug'
 
 # Create tasks
-tasks = []
+time = Time.now
+times = [time, time]
 tasks_data = [
-  {
-    title: 'Add authentication',
-    description: 'All users has to be able to authenticate in our system',
-    status: 'assigned'
-  },
-  {
-    title: 'Add verification',
-    description: 'All users has to be able to verify that the all are popugs',
-    status: 'unassigned'
-  },
-  {
-    title: 'Add statistics',
-    description: 'All users has to be able to check their tasks statistics',
-    status: 'unassigned'
-  },
-  {
-    title: 'Add madness',
-    description: 'All users has to be mad',
-    status: 'unassigned'
-  },
-  {
-    title: 'Add cornfields',
-    description: 'All users has to be corn',
-    status: 'unassigned'
-  },
-  {
-    title: 'Add anime',
-    description: 'All users has to become anime at some point',
-    status: 'unassigned'
-  },
-  {
-    title: 'Add captcha bot to ruby chat',
-    description: 'All users has to become anime at some point',
-    status: 'closed'
-  }
+  [
+    'Add authentication',
+    'All users has to be able to authenticate in our system',
+    'assigned'
+  ],
+  [
+    'Add verification',
+    'All users has to be able to verify that the all are popugs',
+    'unassigned'
+  ],
+  [
+    'Add statistics',
+    'All users has to be able to check their tasks statistics',
+    'unassigned'
+  ],
+  [
+    'Add madness',
+    'All users has to be mad',
+    'unassigned'
+  ],
+  [
+    'Add cornfields',
+    'All users has to be corn',
+    'unassigned'
+  ],
+  [
+    'Add anime',
+    'All users has to become anime at some point',
+    'unassigned'
+  ],
+  [
+    'Add captcha bot to ruby chat',
+    'All users has to become anime at some point',
+    'completed'
+  ]
 ]
+tasks_data = tasks_data.map { |record| record.push(*times) }
+Task.import(%i[title description status created_at updated_at], tasks_data)
 
-tasks_data.each do |task_data|
-  tasks << Task.create(task_data)
-end
-
-users = []
 users_data = [
-  {
-    name: 'Mark',
-    role: 'developer'
-  },
-  {
-    name: 'Tsar',
-    role: 'developer'
-  },
-  {
-    name: 'Imperator',
-    role: 'developer'
-  },
-  {
-    name: 'Overlord',
-    role: 'developer'
-  },
-  {
-    name: 'Bill',
-    role: 'manager'
-  }
+  %w[Mark developer],
+  %w[Tsar developer],
+  %w[Imperator developer],
+  %w[Overlord developer],
+  %w[Bill manager]
 ]
-users_data.each do |user_data|
-  users << User.create(user_data)
-end
+users_data = users_data.map { |record| record.push(*times) }
+User.import(%i[name role created_at updated_at], users_data)
 
-TaskAssignment.create(task_id: tasks.last.id, user_id: users.first.id)
-TaskAssignment.create(task_id: tasks.first.id, user_id: users.first.id)
+task_ids = Task.map(&:id)
+user_ids = User.where(role: 'developer').map(&:id)
+task_assignments_data = task_ids.map do |task_id|
+  [task_id, user_ids[rand(user_ids.length)]]
+end
+task_assignments_data = task_assignments_data.map { |record| record.push(*times) }
+
+TaskAssignment.import(%i[task_id user_id created_at updated_at], task_assignments_data)

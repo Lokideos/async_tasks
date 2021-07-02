@@ -16,7 +16,14 @@ module Users
 
       if @user.valid?
         @user.save
-        EventProducer.send_event('user created', 'CUD', @user)
+        EventProducer.send_event(
+          topic: Settings.kafka.topics.authentication,
+          event_name: 'user created',
+          event_type: 'CUD',
+          payload: {
+            public_id: @user.id
+          }
+        )
       else
         fail!(@user.errors)
       end

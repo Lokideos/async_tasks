@@ -6,7 +6,16 @@ module ApplicationLoader
   def load_app!
     init_config
     init_db
-    require_app
+    if ENV['RACK_ENV'] == 'production'
+      require_app
+    else
+      loader = Zeitwerk::Loader.new
+      Dir["#{root}/app/**/*"].select { |f| File.directory?(f) }.each { |d| loader.push_dir(d) }
+      loader.push_dir("#{root}/app")
+      loader.push_dir("#{root}/config")
+      HotReloader.will_listen(loader)
+    end
+
     init_app
   end
 
